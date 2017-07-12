@@ -1,0 +1,14 @@
+/*
+Arnel Gomez
+3roA
+Fecha
+*/
+
+//Codigo Inicio
+for(int i=1;i<10;i++){
+	if(i%2==0){
+		print(i+" es par ")
+	}
+}
+6b"
+//Codigo Fin
