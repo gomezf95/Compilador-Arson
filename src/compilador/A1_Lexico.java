@@ -188,7 +188,7 @@ public final class A1_Lexico {
                     //- , -- , -= o ->
                     case 18:
                         if (caracter == '-') {
-                            agregar(23, "--");
+                            agregar(24, "--");
                             tipo = 0;
                         } else if (caracter == '=') {
                             agregar(42, "-=");
@@ -217,7 +217,7 @@ public final class A1_Lexico {
                             agregar(44, "/=");
                             tipo = 0;
                             
-                        // '//'
+                        // Comentario: '//'
                         } else if (caracter == '/') {
                             do {
                                 posicion++;
@@ -226,7 +226,7 @@ public final class A1_Lexico {
                                     > posicion + 1);
                             tipo = 0;
                             
-                        // '/*'
+                        // Comentario: '/* y  */'
                         } else if (caracter == '*') {
                             boolean bandera = false;
                             do {
@@ -290,9 +290,14 @@ public final class A1_Lexico {
                     case 33:
                         if (digito(caracter)) {
                             tipo = 3;
+                        } else if(palabra.length()==2){
+                            agregar=true;
                         } else {
+                            palabra = palabra.substring(0, palabra.length() - 1);
+                            posicion--;
+                            tipo = 2;
                             agregar = true;
-                        }
+                        } 
                         break;
 
                     //Inicio de octal, hexadecimal, binario o escape a float despues del punto
@@ -430,6 +435,7 @@ public final class A1_Lexico {
     //4 y 39: Se esta enmedio de la evaluacion de una cadena o caracter y se pueden aceptar espacios dentro de estos
     //5: Esta esperando la clausura de caracter "' '" pero siguio un espacio, aun asi se debe entrar para evaluar el error
     //36 y 37: Las palabras pueden ser "0x" o "0b" seguidas por un espacio, en este caso no pueden ser aceptados, es mejor dejar que se evalue en los case
+    //34: Se recibe un numero seguido por un punto y luego un espacio, el case debe separar los elementos
     private boolean excepcion(int tipo) {
         switch (tipo) {
             case 4:
@@ -439,7 +445,9 @@ public final class A1_Lexico {
             
             case 36:
             case 37:
-                    
+                
+            case 34:
+                
                 return true;
             
             default:
