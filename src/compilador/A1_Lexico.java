@@ -447,7 +447,8 @@ public final class A1_Lexico {
             case 37:
                 
             case 34:
-                
+            
+            case 38:
                 return true;
             
             default:
@@ -511,14 +512,30 @@ public final class A1_Lexico {
                 return 2004;
             case "while":
                 return 2005;
-            case "return":
-                return 2006;
             case "switch":
-                return 2007;
+                return 2006;
             case "case":
+                return 2007;
+            case "return":
                 return 2008;
-            case "print":
+            case "class":
                 return 3000;
+            case "import":
+                return 3001;
+            case "package":
+                return 3002;
+            case "public":
+                return 4001;
+            case "private":
+                return 4002;
+            case "protected":
+                return 4003;
+            case "print":
+                return 9000;
+            case "println":
+                return 9001;
+            case "write":
+                return 9002;
             default:
                 return tipo;
         }
@@ -666,7 +683,11 @@ public final class A1_Lexico {
                     definicion = "Reservada Tipo";
                 } else if (tipo < 3000) {
                     definicion = "Reservada Flujo";
-                } else {
+                } else if (tipo < 4000) {
+                    definicion = "Clase y Agregados";
+                } else if (tipo < 5000) {
+                    definicion = "Seguridad";
+                }else {
                     definicion = "Reservada Funcion";
                 }
         }
