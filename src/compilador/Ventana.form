@@ -141,7 +141,7 @@
                     <Component class="javax.swing.JTable" name="TablaLexico">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="100">
+                          <Table columnCount="5" rowCount="1">
                             <Column editable="false" title="Nombre" type="java.lang.Object"/>
                             <Column editable="false" title="Categoria" type="java.lang.Object"/>
                             <Column editable="false" title="Londitud" type="java.lang.Object"/>
