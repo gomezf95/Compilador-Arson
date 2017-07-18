@@ -3,6 +3,7 @@ package compilador;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class Ventana extends javax.swing.JFrame {
@@ -55,7 +56,7 @@ public class Ventana extends javax.swing.JFrame {
 
         TablaLexico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "Categoria", "Londitud", "Valor", "Indice"
@@ -109,106 +110,7 @@ public class Ventana extends javax.swing.JFrame {
 
         TablaSintactico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Pila 1", "Pila 2"
@@ -362,14 +264,28 @@ public class Ventana extends javax.swing.JFrame {
 //                TablaLexico.setValueAt("", i, j);
 //            }
 //        }
+        if(!lex.errores.equals(""))
+        {
+            new ventana_errores(lex.errores).setVisible(true);
+        }
         return lex.lexicoArreglo();
     }
     
-    private void tablasintactico(String[] lexemas) {
-        A2_Sintactico sin = new A2_Sintactico(lexemas);
-        String [][] sintaxis = sin.sintacticoMatriz();
-        TablaSintactico.setValueAt(sintaxis[0][0], 0, 0);
-        TablaSintactico.setValueAt(sintaxis[0][1], 0, 1);
+    private String tablasintactico(String[] lexemas) {
+        DefaultTableModel model = (DefaultTableModel) TablaSintactico.getModel();
+        String [] cols = new String[2];
+        A2_Sintactico sint = new A2_Sintactico(lexemas);
+        String [][] sintaxis = sint.sintacticoMatriz();
+        int tam=sintaxis.length;
+        int i;
+        for (i = 0; i < tam; i++) {
+//            TablaSintactico.setValueAt(sintaxis[i][0], i, 0);
+//            TablaSintactico.setValueAt(sintaxis[i][1], i, 1);
+            cols[0] = sintaxis[i][0];
+            cols[1] = sintaxis[i][1];
+            model.addRow(cols);
+        }
+        return sint.arbol();
     }
 
     private void lexico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lexico1ActionPerformed
