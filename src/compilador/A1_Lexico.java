@@ -16,6 +16,8 @@ public final class A1_Lexico {
     //Para almacenar la cadena libre de espacios
     private String cadenaToken="";
     
+    public String errores="";
+    
     //Catalogador de palabras
     private int maquina(String codigo, int tipo, int posicion, String palabra) {
         
@@ -696,39 +698,40 @@ public final class A1_Lexico {
 
     //Casos de error, imprimen un mensaje en pantalla y cambian su tipo a valor negativo
     private void error(int tipo, String palabra) {
-        System.out.print("ERROR " + tipo + ":\n \"" + palabra + "\" ");
+        errores += "ERROR " + tipo + ":\n \"" + palabra + "\" ";
+        //System.out.print("ERROR " + tipo + ":\n \"" + palabra + "\" ");
         char aux;
         switch (tipo) {
             case 1:
-                System.out.println("Caracter Desconocido");
+                errores += "Caracter Desconocido\n";
                 break;
 
             case 4:
-                System.out.print("Cadena inconclusa, se necesita otro '\"' para"
-                        + " cerrarse");
+                errores += "Cadena inconclusa, se necesita otro '\"' para"
+                        + " cerrarse\n";
                 break;
 
             case 5:
-                System.out.print("Caracter necesita de otro \"'\" para cerrarse"
-                        + " y solo puede ser un caracter singular");
+                errores += "Caracter necesita de otro \"'\" para cerrarse"
+                        + " y solo puede ser un caracter singular\n";
                 break;
 
             case 36:
-                System.out.print("Hexadecimal vacio");
+                errores += "Hexadecimal vacio";
                 break;
 
             case 37:
-                System.out.print("Binario vacio");
+                errores += "Binario vacio";
                 break;
 
             case 39:
-                System.out.print("Caracter necesita de otro \"'\" para cerrarse"
-                        + " y no puede ser otro \"'\" ");
+                errores += "Caracter necesita de otro \"'\" para cerrarse"
+                        + " y no puede ser otro \"'\" ";
                 break;
 
             case 99:
-                System.out.print("Comentario no cerrado, se necesita un */ para"
-                        + "cerrarse");
+                errores += "Comentario no cerrado, se necesita un */ para"
+                        + "cerrarse";
                 break;
             default:
                 System.out.print("?");
