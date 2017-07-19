@@ -504,6 +504,8 @@ public final class A1_Lexico {
                 return 1003;
             case "float":
                 return 1004;
+            case "void":
+                return 1005;
             case "if":
                 return 2000;
             case "else":
